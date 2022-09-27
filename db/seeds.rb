@@ -12,5 +12,5 @@ User.create(first_name: 'Admin', last_name: 'Crims', email: 'admin@crims.com',
 User.create(first_name: 'Responder', last_name: 'Crims', email: 'responder@crims.com',
                        password: 'password', password_confirmation: 'password', type: 'Users::Responder')
 
-User.create(first_name: 'Complainant', last_name: 'Crims', email: 'admin@crims.com',
+User.create(first_name: 'Complainant', last_name: 'Crims', email: 'complainant@crims.com',
                       password: 'password', password_confirmation: 'password', type: 'Users::Complainant')
