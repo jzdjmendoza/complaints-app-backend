@@ -24,5 +24,7 @@
 
 module Users
   class Responder < User
+    has_many :complaints, foreign_key: :responder_id, as: :responder
+    has_one :location, foreign_key: :responder_id, as: :responder
   end
 end

@@ -24,5 +24,6 @@
 
 module Users
   class Complainant < User
+    has_many :complaints, foreign_key: :complainant_id, as: :complainant
   end
 end

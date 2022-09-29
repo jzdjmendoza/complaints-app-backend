@@ -1,10 +1,11 @@
 module Complainants
   class ComplainantsController < ApplicationController
-    before_action :get_complainant
+    before_action :check_if_complainant
 
     private
-    def get_complainant
-      @complainant_id = ::Users::Complainant.find_by(id: params[:complainant_id])
+
+    def check_if_complainant
+      unauthorized('Only registered complainant can access') unless current_user.type == 'Users::Complainant'
     end
   end
 end

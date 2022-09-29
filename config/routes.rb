@@ -12,6 +12,9 @@ Rails.application.routes.draw do
       scope :complainants, module: 'complainants' do
         resources :complaints, only: [:index, :show, :create]
       end
+      scope :responders, module: 'responders' do
+        resources :complaints, only: [:index, :show, :update]
+      end
     end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

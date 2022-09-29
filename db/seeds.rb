@@ -14,3 +14,5 @@ User.create(first_name: 'Responder', last_name: 'Crims', email: 'responder@crims
 
 User.create(first_name: 'Complainant', last_name: 'Crims', email: 'complainant@crims.com',
                       password: 'password', password_confirmation: 'password', type: 'Users::Complainant')
+
+Users::Responder.first.create_location(city: 'TONDO I / II', barangay: 'Barangay 1')

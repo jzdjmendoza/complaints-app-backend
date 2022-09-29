@@ -1,0 +1,16 @@
+# This model initially had no columns defined. If you add columns to the
+# model remove the "{}" from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+first_complaint: 
+  id: 1
+  city: 'TONDO I / II'
+  barangay: 'Barangay 1'
+  responder_type: User
+  responder_id: 2
+  complainant_id: 3
+  complainant_type: User 
+  subject: 'Test Subject'
+  body: 'Test Body'
+#
+# column: value

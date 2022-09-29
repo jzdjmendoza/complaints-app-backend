@@ -24,11 +24,23 @@
 class Complaint < ApplicationRecord
   extend Enumerize
 
-  belongs_to :complainant, class_name: 'User', foreign_key: 'complainant_id'
-  belongs_to :responder, class_name: 'User', foreign_key: 'responder_id'
+  belongs_to :complainant, class_name: 'Users::Complainant', foreign_key: 'complainant_id', polymorphic: true
+  belongs_to :responder, class_name: 'Users::Responder', foreign_key: 'responder_id', polymorphic: true
 
   validates_presence_of :subject, :body, :status, :city, :barangay
 
   enumerize :status,
             in: %w[pending received dispatched]
+
+  before_validation :add_responder
+
+  delegate :name, to: :responder, prefix: true
+
+  private
+  def add_responder
+    return if responder_id.present?
+
+    location = ::Location.find_by(city: city, barangay: barangay)
+    self.responder = location&.responder
+  end
 end
