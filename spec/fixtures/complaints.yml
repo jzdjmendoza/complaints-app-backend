@@ -1,6 +1,24 @@
-# This model initially had no columns defined. If you add columns to the
-# model remove the "{}" from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
+# == Schema Information
+#
+# Table name: complaints
+#
+#  id               :bigint           not null, primary key
+#  barangay         :string
+#  body             :text
+#  city             :string
+#  complainant_type :string
+#  responder_type   :string
+#  status           :string           default("pending")
+#  subject          :string
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  complainant_id   :bigint
+#  responder_id     :bigint
+#
+# Indexes
+#
+#  index_complaints_on_complainant  (complainant_type,complainant_id)
+#  index_complaints_on_responder    (responder_type,responder_id)
 #
 first_complaint: 
   id: 1

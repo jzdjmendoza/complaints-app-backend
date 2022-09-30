@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   # resources :complainants, module: 'complainants' do
   #   resources :complaints, only: [:index, :show, :create]
   # end

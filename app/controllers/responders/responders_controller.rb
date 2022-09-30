@@ -1,5 +1,5 @@
 module Responders
-  class RespondersController < ApplicationController
+  class RespondersController < ApiController
     before_action :check_if_responder
 
     private

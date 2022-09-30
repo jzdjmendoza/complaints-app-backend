@@ -39,8 +39,7 @@ class Complaint < ApplicationRecord
   private
   def add_responder
     return if responder_id.present?
-
-    location = ::Location.find_by(city: city, barangay: barangay)
-    self.responder = location&.responder
+    responder = Users::Responder.find_by(city: city, barangay: barangay)
+    self.responder = responder if responder
   end
 end

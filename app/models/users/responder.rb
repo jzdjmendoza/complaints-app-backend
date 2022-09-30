@@ -3,6 +3,8 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  barangay               :string
+#  city                   :string
 #  contact_number         :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
@@ -22,9 +24,17 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
+# Indexes
+#
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#
+
 module Users
   class Responder < User
     has_many :complaints, foreign_key: :responder_id, as: :responder
     has_one :location, foreign_key: :responder_id, as: :responder
+
+    validates_uniqueness_of :barangay, scope: :city
   end
 end

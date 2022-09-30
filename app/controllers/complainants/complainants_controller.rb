@@ -1,5 +1,5 @@
 module Complainants
-  class ComplainantsController < ApplicationController
+  class ComplainantsController < ApiController
     before_action :check_if_complainant
 
     private

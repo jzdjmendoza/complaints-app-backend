@@ -26,23 +26,10 @@
 
 require 'rails_helper'
 
-RSpec.describe User, type: :model do
+RSpec.describe Users::Responder, type: :model do
 
   describe 'Validations' do 
-    it { should validate_presence_of(:email) }
-    it { should validate_presence_of(:first_name) }
-    it { should validate_presence_of(:last_name) }
-    it { should validate_presence_of(:type) }
-    it { should validate_presence_of(:city) }
-    it { should validate_presence_of(:barangay) }
-  end
-
-  describe 'Public Methods' do
-    fixtures :users
-    let(:admin) { users(:admin) }
-
-    it 'should return full name' do
-      expect(admin.name).to eq "#{admin.first_name} #{admin.middle_name} #{admin.last_name}"
-    end
+    it { have_many(:complaints).with_foreign_key(:responder_id) }
+    it { validate_uniqueness_of(:barangay).scoped_to(:city) }
   end
 end

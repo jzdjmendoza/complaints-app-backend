@@ -1,6 +1,18 @@
-# This model initially had no columns defined. If you add columns to the
-# model remove the "{}" from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
+# == Schema Information
+#
+# Table name: locations
+#
+#  id             :bigint           not null, primary key
+#  barangay       :string
+#  city           :string
+#  responder_type :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  responder_id   :bigint
+#
+# Indexes
+#
+#  index_locations_on_responder  (responder_type,responder_id)
 #
 manila: 
   id: 1

@@ -40,9 +40,8 @@ RSpec.describe Complaint, type: :model do
     fixtures(:all)
     let(:responder) { users(:responder) }
     let(:complainant) { users(:complainant) }
-    let(:location) { locations(:manila) }
     it 'should have responder' do
-      record = complainant.complaints.create(subject: 'Test', body: 'Test Body', city: location.city, barangay: location.barangay)
+      record = complainant.complaints.create(subject: 'Test', body: 'Test Body', city: responder.city, barangay: responder.barangay)
       expect(record.persisted?).to eq(true)
       expect(record.responder_id).to eq(responder.id)
     end

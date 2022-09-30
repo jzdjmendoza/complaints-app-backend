@@ -16,3 +16,4 @@ User.create(first_name: 'Complainant', last_name: 'Crims', email: 'complainant@c
                       password: 'password', password_confirmation: 'password', type: 'Users::Complainant')
 
 Users::Responder.first.create_location(city: 'TONDO I / II', barangay: 'Barangay 1')
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
