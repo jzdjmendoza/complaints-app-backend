@@ -14,6 +14,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  status                 :string
 #  type                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -39,10 +40,10 @@ RSpec.describe User, type: :model do
 
   describe 'Public Methods' do
     fixtures :users
-    let(:admin) { users(:admin) }
+    let(:responder) { users(:responder) }
 
     it 'should return full name' do
-      expect(admin.name).to eq "#{admin.first_name} #{admin.middle_name} #{admin.last_name}"
+      expect(responder.name).to eq "#{responder.first_name} #{responder.middle_name} #{responder.last_name}"
     end
   end
 end

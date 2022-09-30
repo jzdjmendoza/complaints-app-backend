@@ -7,6 +7,7 @@
 #  body             :text
 #  city             :string
 #  complainant_type :string
+#  notes            :text
 #  responder_type   :string
 #  status           :string           default("pending")
 #  subject          :string
@@ -35,6 +36,7 @@ class Complaint < ApplicationRecord
   before_validation :add_responder
 
   delegate :name, to: :responder, prefix: true
+  delegate :status, to: :responder, prefix: true
 
   private
   def add_responder

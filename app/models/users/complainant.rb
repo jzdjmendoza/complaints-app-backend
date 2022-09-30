@@ -14,6 +14,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  status                 :string
 #  type                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -26,6 +27,22 @@
 
 module Users
   class Complainant < User
+    extend Enumerize
+
     has_many :complaints, foreign_key: :complainant_id, as: :complainant
+
+    validates_presence_of :status
+
+    enumerize :status,
+              in: %w[pending verified]
+
+    before_validation :add_default_status
+
+    private
+    def add_default_status
+      return if status.present?
+
+      self.status = 'pending'
+    end
   end
 end

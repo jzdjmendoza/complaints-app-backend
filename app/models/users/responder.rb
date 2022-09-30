@@ -14,6 +14,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  status                 :string
 #  type                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -33,7 +34,7 @@
 module Users
   class Responder < User
     has_many :complaints, foreign_key: :responder_id, as: :responder
-    has_one :location, foreign_key: :responder_id, as: :responder
+    has_many :complainants, through: :complaints
 
     validates_uniqueness_of :barangay, scope: :city
   end

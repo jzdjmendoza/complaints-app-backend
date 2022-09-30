@@ -30,5 +30,15 @@ RSpec.describe Users::Complainant, type: :model do
 
   describe 'Validations' do 
     it { have_many(:complaints).with_foreign_key(:complainant_id) }
+    it { validate_presence_of(:status) }
+  end
+
+  describe 'Callbacks' do
+    it 'should have pending status as default' do
+      user = Users::Complainant.create(first_name: 'Test', last_name: 'User', email: 'test@user.com', city: 'Test City', barangay: 'Test Barangay',
+                                       password: 'password', password_confirmation: 'password')
+      expect(user.persisted?).to eq(true)
+      expect(user.status).to eq('pending')
+    end
   end
 end

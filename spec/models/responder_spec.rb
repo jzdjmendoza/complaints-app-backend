@@ -23,10 +23,14 @@
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
-require "test_helper"
 
-class UserTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+require 'rails_helper'
+
+RSpec.describe Users::Responder, type: :model do
+
+  describe 'Validations' do 
+    it { have_many(:complaints).with_foreign_key(:responder_id) }
+    it { have_many(:complainants).through(:complaints) }
+    it { validate_uniqueness_of(:barangay).scoped_to(:city) }
+  end
 end

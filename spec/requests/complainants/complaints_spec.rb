@@ -10,20 +10,19 @@ RSpec.describe "Complainants::Complaints", type: :request do
         'Authorization': "Token #{ user.generate_jwt }"
       }
     end
-    let(:location) { locations(:manila) }
     let(:complaint_params) do
       {
         complaint: {
           subject: 'Test Subject',
           body: 'Test Body for Subject',
-          city: location.city,
-          barangay: location.barangay
+          city: user.city,
+          barangay: user.barangay
         }
       }.to_json
     end
 
     it 'should not be able to access if not a complainant' do
-      get '/api/v1/complainants/complaints', params: {}, headers: { 'Content-Type': 'application/json', 'Authorization': "Token #{ users(:admin) }"}
+      get '/api/v1/complainants/complaints', params: {}, headers: { 'Content-Type': 'application/json', 'Authorization': "Token #{ users(:responder) }"}
       expect(response).to have_http_status(401)
     end
 

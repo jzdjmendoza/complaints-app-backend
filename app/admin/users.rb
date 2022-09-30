@@ -5,7 +5,8 @@ ActiveAdmin.register User do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :email, :password, :first_name, :middle_name, :last_name, :type, :contact_number, :city, :barangay
+  permit_params :email, :password, :first_name, :middle_name, :last_name,
+                :type, :contact_number, :city, :barangay, :status
   #
   # or
   #
@@ -38,6 +39,7 @@ ActiveAdmin.register User do
     end
     column :email
     column :type
+    column :status
     column :created_at
     column :updated_at
     actions
@@ -54,6 +56,7 @@ ActiveAdmin.register User do
       row :contact_number
       row :city
       row :barangay
+      row :status
       row :created_at
       row :updated_at
     end
@@ -67,6 +70,7 @@ ActiveAdmin.register User do
       f.input :middle_name
       f.input :last_name
       f.input :type, as: :select, collection: User.type.values
+      f.input :status, as: :select, collection: Users::Complainant.status.values
       f.input :contact_number
       f.input :city, as: :select, collection: Pilipinas::City.all.map{|a| a.name}
       f.input :barangay, as: :select, collection: Pilipinas::Barangay.all.map{|a| a.name}

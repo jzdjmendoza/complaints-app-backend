@@ -16,6 +16,7 @@ Rails.application.routes.draw do
       end
       scope :responders, module: 'responders' do
         resources :complaints, only: [:index, :show, :update]
+        resources :complainants, only: [:index, :show, :update]
       end
     end
   end

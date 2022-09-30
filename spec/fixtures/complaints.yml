@@ -7,6 +7,7 @@
 #  body             :text
 #  city             :string
 #  complainant_type :string
+#  notes            :text
 #  responder_type   :string
 #  status           :string           default("pending")
 #  subject          :string

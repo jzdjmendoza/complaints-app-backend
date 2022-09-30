@@ -5,7 +5,7 @@ ActiveAdmin.register Complaint do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :body, :subject, :complainant_id, :status, :city, :barangay
+  permit_params :body, :subject, :complainant_id, :status, :city, :barangay, :notes
 
   filter :id
   filter :complainant_id
@@ -35,6 +35,7 @@ ActiveAdmin.register Complaint do
       row :responder
       row :city
       row :barangay
+      row :notes
       row :created_at
       row :updated_at
     end
@@ -44,6 +45,7 @@ ActiveAdmin.register Complaint do
     f.inputs 'Complaint Detail' do
       f.input :body
       f.input :subject
+      f.input :notes
       f.input :status, as: :select, collection: Complaint.status.values
       f.input :complainant, as: :select, collection: Users::Complainant.all, include_blank: false
       f.input :city, as: :select, collection: Users::Responder.pluck(:city).uniq

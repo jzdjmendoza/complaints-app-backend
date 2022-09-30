@@ -10,7 +10,6 @@ RSpec.describe "Responders::Complaints", type: :request do
         'Authorization': "Token #{ user.generate_jwt }"
       }
     end
-    let(:location) { locations(:manila) }
     let(:complaint_params) do
       {
         complaint: {
@@ -21,7 +20,7 @@ RSpec.describe "Responders::Complaints", type: :request do
     end
 
     it 'should not be able to access if not a complainant' do
-      get '/api/v1/responders/complaints', params: {}, headers: { 'Content-Type': 'application/json', 'Authorization': "Token #{ users(:admin) }"}
+      get '/api/v1/responders/complaints', params: {}, headers: { 'Content-Type': 'application/json', 'Authorization': "Token #{ users(:responder) }"}
       expect(response).to have_http_status(401)
     end
 
@@ -37,7 +36,7 @@ RSpec.describe "Responders::Complaints", type: :request do
       expect(response).to have_http_status(200)
     end
 
-    it 'should be able to receive complaint' do
+    it 'should be able to update complaint' do
       put '/api/v1/responders/complaints/1', params: {status: 'received'}.to_json, headers: headers
       expect(response).to have_http_status(200)
       expect(Complaint.find(1).status).to eq('received')
