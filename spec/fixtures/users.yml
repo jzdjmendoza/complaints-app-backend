@@ -46,4 +46,5 @@ complainant:
   type: Users::Complainant
   city: 'TONDO I / II'
   barangay: 'Barangay 1'
+  status: 'pending'
 # column: value

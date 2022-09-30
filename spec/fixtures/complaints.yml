@@ -31,5 +31,6 @@ first_complaint:
   complainant_type: User 
   subject: 'Test Subject'
   body: 'Test Body'
+  notes: 'Test Notes'
 #
 # column: value

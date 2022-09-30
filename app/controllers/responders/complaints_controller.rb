@@ -26,7 +26,7 @@ module Responders
     end
   
     def complaint_params
-      params.require(:complaint).permit(:id, :status)
+      params.require(:complaint).permit(:id, :status, :notes)
     end
   end
 end

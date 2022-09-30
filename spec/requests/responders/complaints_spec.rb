@@ -10,14 +10,6 @@ RSpec.describe "Responders::Complaints", type: :request do
         'Authorization': "Token #{ user.generate_jwt }"
       }
     end
-    let(:complaint_params) do
-      {
-        complaint: {
-          id: 1,
-          status: 'received'
-        }
-      }.to_json
-    end
 
     it 'should not be able to access if not a complainant' do
       get '/api/v1/responders/complaints', params: {}, headers: { 'Content-Type': 'application/json', 'Authorization': "Token #{ users(:responder) }"}
@@ -37,9 +29,10 @@ RSpec.describe "Responders::Complaints", type: :request do
     end
 
     it 'should be able to update complaint' do
-      put '/api/v1/responders/complaints/1', params: {status: 'received'}.to_json, headers: headers
+      put '/api/v1/responders/complaints/1', params: {status: 'received', notes: 'test notes'}.to_json, headers: headers
       expect(response).to have_http_status(200)
       expect(Complaint.find(1).status).to eq('received')
+      expect(Complaint.find(1).notes).to eq('test notes')
     end
   end
 end

@@ -34,7 +34,7 @@
 module Users
   class Responder < User
     has_many :complaints, foreign_key: :responder_id, as: :responder
-    has_many :complainants, through: :complaints
+    has_many :complainants, through: :complaints, source_type: 'User'
 
     validates_uniqueness_of :barangay, scope: :city
   end

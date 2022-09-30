@@ -41,7 +41,6 @@ module Users
     private
     def add_default_status
       return if status.present?
-
       self.status = 'pending'
     end
   end
