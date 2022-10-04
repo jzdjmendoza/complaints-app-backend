@@ -37,11 +37,28 @@ class User < ApplicationRecord
             in: %w[Users::Admin Users::Complainant Users::Responder],
             predicates: true
 
+  before_validation :set_default_type
+  before_validation :set_default_status
+
   def name
     "#{first_name} #{middle_name} #{last_name}"
   end
 
   def generate_jwt
     ::JsonWebToken.encode({ id: id, exp: 60.days.from_now.to_i })
+  end
+
+  private
+
+  def set_default_type
+    return unless type.blank?
+
+    self.type = 'Users::Complainant'
+  end
+
+  def set_default_status
+    return unless status.blank?
+
+    self.status = 'pending'
   end
 end

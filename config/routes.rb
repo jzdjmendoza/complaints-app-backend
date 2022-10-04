@@ -8,8 +8,9 @@ Rails.application.routes.draw do
   
   scope :api, defaults: { format: :json } do
     scope :v1 do
-      devise_for :users, controllers: { sessions: :sessions },
-                         path_names: { sign_in: :login }
+      devise_for :users, controllers: { sessions: :sessions, registrations: :registrations },
+                        path_names: { sign_in: :login, registration: 'register' }
+      # post "/register", to: :'devise/registrations#create'
       resource :user, only: [:show, :update]
       scope :complainants, module: 'complainants' do
         resources :complaints, only: [:index, :show, :create]
