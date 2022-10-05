@@ -10,7 +10,6 @@ Rails.application.routes.draw do
     scope :v1 do
       devise_for :users, controllers: { sessions: :sessions, registrations: :registrations },
                         path_names: { sign_in: :login, registration: 'register' }
-      # post "/register", to: :'devise/registrations#create'
       resource :user, only: [:show, :update]
       scope :complainants, module: 'complainants' do
         resources :complaints, only: [:index, :show, :create]
@@ -18,6 +17,12 @@ Rails.application.routes.draw do
       scope :responders, module: 'responders' do
         resources :complaints, only: [:index, :show, :update]
         resources :complainants, only: [:index, :show, :update]
+      end
+      scope :public, module: 'public' do
+        get '/regions', to: 'locations#regions'
+        get '/provinces', to: 'locations#provinces'
+        get '/cities', to: 'locations#cities'
+        get '/barangays', to: 'locations#barangays'
       end
     end
   end
