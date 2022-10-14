@@ -7,7 +7,7 @@ class ApiController < ActionController::API
   end
 
   def not_found
-    render json: { errors: 'Record not found!' }
+    render json: { errors: 'Record not found!' }, status: :unprocessable_entity
   end
 
   private

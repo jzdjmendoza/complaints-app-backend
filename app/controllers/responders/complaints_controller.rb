@@ -4,7 +4,7 @@ module Responders
     before_action :get_complaint, only: [:show, :update]
 
     def index
-      render json: current_user.complaints
+      render json: current_user.complaints.where.not(status: :resolved)
     end
 
     def show
@@ -26,7 +26,7 @@ module Responders
     end
   
     def complaint_params
-      params.require(:complaint).permit(:id, :status, :notes)
+      params.permit(:id, :status, :notes)
     end
   end
 end

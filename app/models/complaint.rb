@@ -31,9 +31,10 @@ class Complaint < ApplicationRecord
   validates_presence_of :subject, :body, :status, :city, :barangay
 
   enumerize :status,
-            in: %w[pending received dispatched]
+            in: %w[pending received dispatched resolved]
 
   before_validation :add_responder
+  after_create :send_sms
 
   delegate :name, to: :responder, prefix: true
   delegate :status, to: :responder, prefix: true
@@ -42,6 +43,12 @@ class Complaint < ApplicationRecord
   def add_responder
     return if responder_id.present?
     responder = Users::Responder.find_by(city: city, barangay: barangay)
+    debugger
     self.responder = responder if responder
+  end
+
+  def send_sms
+    message = Message.new("#{complainant.name} has sent a complaint to your area!", responder.contact_number)
+    message.send_message
   end
 end
