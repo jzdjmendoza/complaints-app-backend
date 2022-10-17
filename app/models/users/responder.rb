@@ -34,8 +34,12 @@
 module Users
   class Responder < User
     has_many :complaints, foreign_key: :responder_id, as: :responder
-    has_many :complainants, through: :complaints, source_type: 'User'
+    # has_many :complainants, through: :complaints, source_type: 'User'
 
     validates_uniqueness_of :barangay, scope: :city
+
+    def complainants
+      Users::Complainant.where(city: city, barangay: barangay)
+    end
   end
 end

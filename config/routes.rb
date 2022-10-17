@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         resources :complaints, only: [:index, :show, :create]
       end
       scope :responders, module: 'responders' do
+        post "/broadcast" => "broadcasts#send_sms", :as => :create_forum
         resources :complaints, only: [:index, :show, :update]
         resources :complainants, only: [:index, :show, :update]
       end
