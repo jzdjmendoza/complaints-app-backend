@@ -3,7 +3,7 @@ module Responders
     before_action :get_complainant, only: [:show, :update]
 
     def index
-      render json: current_user.complainants.where(filter_params)
+      render json: current_user.complainants.where(filter_params).uniq
     end
 
     def show
